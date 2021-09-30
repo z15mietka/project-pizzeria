@@ -67,28 +67,40 @@
 
       console.log('new Product:', thisProduct);
     }
-  }
-    renderInMenu();{
+    renderInMenu(){
       const thisProduct = this;
-
-      /*generate HTML based on template*/
-
       const generatedHTML = templates.menuProduct(thisProduct.data);
-
-      /*create element using utils.createElementFrom HTML*/
-
       thisProduct.element = utils.createDOMFromHTML(generatedHTML);
-
-      /*find menu container*/
-
       const menuContainer = document.querySelector(select.containerOf.menu);
-
-      /*add element to menu*/
-
       menuContainer.appendChild(thisProduct.element);
     }
-
-
+    getElements(){
+      const thisProduct = this;
+      thisProduct.dom = {};
+      thisProduct.dom.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      thisProduct.dom.form = thisProduct.element.querySelector(select.menuProduct.form);
+      thisProduct.dom.formInputs = thisProduct.dom.form.querySelectorAll(select.all.formInputs);
+      thisProduct.dom.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+      thisProduct.dom.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.dom.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+      thisProduct.dom.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
+    
+    }
+    initAccordion() {
+      const thisProduct = this;
+      thisProduct.dom.accordionTrigger.addEventListener('click', function(event){
+        event.preventDefault();
+        const activeProduct =  document.querySelector(select.all.menuProductsActive);
+        if(activeProduct && activeProduct !== thisProduct.element) {
+          activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
+          thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
+        }
+        else {
+          thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
+        }
+      });
+    }
+    
 const app = {
   initMenu: function(){
     const thisApp = this;
