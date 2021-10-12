@@ -1,4 +1,5 @@
-/* global Handlebars, utils */ //
+/* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
+
 {
   'use strict';
   const select = {
@@ -70,7 +71,7 @@
       defaultDeliveryFee: 20,
     },
     db: {
-      url: '//localhost:3131',
+      url: '//localhost:3000',
       products: 'products',
       orders: 'orders',
     },
@@ -148,8 +149,9 @@
     }
     processOrder(){
       const thisProduct = this;
+      // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
       const formData = utils.serializeFormToObject(thisProduct.dom.form);
-
+      
       // set price to default price
       let price = thisProduct.data.price;
       // for every category (param)...
@@ -157,7 +159,6 @@
         const param = thisProduct.data.params[paramId];
         for(let optionId in param.options) {
           const option  = param.options[optionId];
-          // check if there is param with a name of paramId in formData and if it includes optionId
           if(formData[paramId].includes(optionId) && !option.hasOwnProperty('default')) {
             price = price + option['price'];
           } 
@@ -173,9 +174,26 @@
             const ingridientImage = thisProduct.dom.imageWrapper.querySelector('.' + paramId + '-' + optionId);
             if(ingridientImage !== null)
               ingridientImage.classList.remove(classNames.menuProduct.imageVisible);
-          }    
         }
       }
+        //const activeImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
+        const activeImage = thisProduct.imageWrapper.querySelector(`.${paramId}-${optionId}`);
+
+        // check if was found, if yes check optionId
+        if (activeImage) {
+
+          // If yes show the activeImage
+          if (formData[paramId] && formData[paramId].includes(optionId)) {
+
+            activeImage.classList.add(classNames.menuProduct.imageVisible);
+
+            //  if not hide the activeImage
+          } else {
+            activeImage.classList.remove(classNames.menuProduct.imageVisible);
+
+        }
+      }
+    }
       price *= thisProduct.amountWidget.value;
       thisProduct.priceSingle = price / thisProduct.amountWidget.value;
       thisProduct.dom.priceElem.innerHTML = price;
