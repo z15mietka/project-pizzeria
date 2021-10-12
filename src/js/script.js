@@ -1,3 +1,4 @@
+/* global Handlebars, utils */ //
 {
   'use strict';
   const select = {
