@@ -174,13 +174,13 @@
             const ingridientImage = thisProduct.dom.imageWrapper.querySelector('.' + paramId + '-' + optionId);
             if(ingridientImage !== null)
               ingridientImage.classList.remove(classNames.menuProduct.imageVisible);
-        }
-      }
+        
+      
         //const activeImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
         const activeImage = thisProduct.imageWrapper.querySelector(`.${paramId}-${optionId}`);
 
         // check if was found, if yes check optionId
-        if (activeImage) {
+          if (activeImage) {
 
           // If yes show the activeImage
           if (formData[paramId] && formData[paramId].includes(optionId)) {
@@ -194,6 +194,7 @@
         }
       }
     }
+  }}
       price *= thisProduct.amountWidget.value;
       thisProduct.priceSingle = price / thisProduct.amountWidget.value;
       thisProduct.dom.priceElem.innerHTML = price;
