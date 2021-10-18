@@ -79,7 +79,9 @@
   
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
+    // CODE ADDED START
     cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
+    // CODE ADDED END
   };
   class Product{
     constructor(id, data){
@@ -176,25 +178,26 @@
               ingridientImage.classList.remove(classNames.menuProduct.imageVisible);
         
       
-        //const activeImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
-        const activeImage = thisProduct.imageWrapper.querySelector(`.${paramId}-${optionId}`);
+            //const activeImage = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
+            const activeImage = thisProduct.imageWrapper.querySelector(`.${paramId}-${optionId}`);
 
-        // check if was found, if yes check optionId
-          if (activeImage) {
+            // check if was found, if yes check optionId
+            if (activeImage) {
 
-          // If yes show the activeImage
-          if (formData[paramId] && formData[paramId].includes(optionId)) {
+              // If yes show the activeImage
+              if (formData[paramId] && formData[paramId].includes(optionId)) {
 
-            activeImage.classList.add(classNames.menuProduct.imageVisible);
+                activeImage.classList.add(classNames.menuProduct.imageVisible);
 
-            //  if not hide the activeImage
-          } else {
-            activeImage.classList.remove(classNames.menuProduct.imageVisible);
+                //  if not hide the activeImage
+              } else {
+                activeImage.classList.remove(classNames.menuProduct.imageVisible);
 
-        }
-      }
-    }
-  }}
+              }
+            }
+          }
+        }}
+      /*multiply price by amount */  
       price *= thisProduct.amountWidget.value;
       thisProduct.priceSingle = price / thisProduct.amountWidget.value;
       thisProduct.dom.priceElem.innerHTML = price;
