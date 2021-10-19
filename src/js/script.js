@@ -64,8 +64,8 @@
   const settings = {
     amountWidget: {
       defaultValue: 1,
-      defaultMin: 1,
-      defaultMax: 9,
+      defaultMin: 0,
+      defaultMax: 10,
     },
     cart: {
       defaultDeliveryFee: 20,
@@ -272,8 +272,8 @@
 
       /* To do: Add validation */
       if(thisWidget !== newValue && !isNaN(newValue) 
-        && newValue <= settings.amountWidget.defaultMax +1 
-        && newValue >= settings.amountWidget.defaultMin -1)
+        && newValue <= settings.amountWidget.defaultMax  
+        && newValue >= settings.amountWidget.defaultMin )
       { 
         thisWidget.value = newValue;
       }
