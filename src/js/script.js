@@ -71,7 +71,7 @@
       defaultDeliveryFee: 20,
     },
     db: {
-      url: '//localhost:3000',
+      url: '//localhost:3131',
       products: 'products',
       orders: 'orders',
     },
@@ -239,7 +239,7 @@
           label: param.label,
           options: {}
         };
-         // for every option in this category
+        // for every option in this category
         for(let optionId in param.options) {
           const option  = param.options[optionId];
           const optionSelected = formData[paramId] && formData[paramId].includes(optionId);
