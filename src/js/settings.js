@@ -125,7 +125,7 @@ export const settings = {
     tableIdAttribute: 'data-table',
   },
   db: {
-    url: '//' + window.location.hostname + (window.location.hostname=='localhost' ? ':3131/api' : ''),
+    url: '//' + window.location.hostname + (window.location.hostname=='localhost' ? ':8080/api' : ''),
     product: 'product',
     order: 'order',
     booking: 'booking',
