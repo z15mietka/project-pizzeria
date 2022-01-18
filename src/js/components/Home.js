@@ -1,45 +1,57 @@
+import { templates, classNames, select} from '../settings.js';
 
-import {templates, select} from '.././settings.js';
-import {app} from '.././app.js';
-
-class Home{
-  constructor(wrapper){
+class Home {
+  constructor(element){
     const thisHome = this;
+    console.log(thisHome);
+    thisHome.render(element);
+    thisHome.initLinks();
+   
 
-    thisHome.render(wrapper);
-    thisHome.initWidgets();
-    app.initLinks(thisHome.mainOptions);
   }
 
-  render(wrapper){
+  render(element) {
     const thisHome = this;
+    const generatedHTML = templates.home();
 
-    const generatedHTML = templates.homeWidget();
     thisHome.dom = {};
-    thisHome.dom.wrapper = wrapper;
+    thisHome.dom.wrapper= element;
     thisHome.dom.wrapper.innerHTML = generatedHTML;
-
-    thisHome.mainOptions = document.querySelectorAll(select.nav.options);
-    thisHome.dom.orderOnline = document.querySelector(select.home.orderButton);
-    thisHome.dom.BookATable = document.querySelector(select.home.bookButton);
   }
 
-  initWidgets(){
+
+  activatePage(pageId){
     const thisHome = this;
 
-    thisHome.elem = document.querySelector(select.widgets.carousel);
-    //eslint-disable-next-line no-undef
-    thisHome.flkty = new Flickity( thisHome.elem, {
-      // options
-      cellAlign: 'left',
-      contain: true,
-      autoPlay: 3000,
-      prevNextButtons: false,
-      wrapAround: true,
-    });
-  }
+    thisHome.pages = document.querySelector(select.containerOf.pages).children;
+    thisHome.navLinks = document.querySelectorAll(select.nav.links);
 
+    for(let page of thisHome.pages){
+      page.classList.toggle(classNames.pages.active, page.id == pageId );
+    }
+    for(let link of thisHome.navLinks){
+      link.classList.toggle(classNames.nav.active);
+      link.getAttribute('href') == '#' + pageId;
+      
+    }
+
+  }
+  initLinks(){
+    const thisHome = this;
+  
+    thisHome.links = document.querySelectorAll('.link');
+
+    for(let link of thisHome.links){
+      link.addEventListener('click', function(event){
+        event.preventDefault;
+        const clickedLink = this;
+        const id = clickedLink.getAttribute('href').replace('#', '');
+
+        thisHome.activatePage(id);
+      });
+    }
+  }
 }
 
-export default Home;
 
+export default Home; 

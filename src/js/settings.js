@@ -1,18 +1,16 @@
-/* global Handlebars */
-
 export const select = {
   templateOf: {
     menuProduct: '#template-menu-product',
-    cartProduct: '#template-cart-product',
+    cartProduct: '#template-cart-product', // CODE ADDED
     bookingWidget: '#template-booking-widget',
-    homeWidget: '#template-home-widget',
+    home: '#template-home-widget',
   },
   containerOf: {
     menu: '#product-list',
     cart: '#cart',
     pages: '#pages',
     booking: '.booking-wrapper',
-    home: '.home-wrapper',
+    home: '#home',
   },
   all: {
     menuProducts: '#product-list > .product',
@@ -29,7 +27,7 @@ export const select = {
   },
   widgets: {
     amount: {
-      input: 'input.amount',
+      input: 'input.amount', // CODE CHANGED
       linkDecrease: 'a[href="#less"]',
       linkIncrease: 'a[href="#more"]',
     },
@@ -42,8 +40,24 @@ export const select = {
       input: 'input[type="range"]',
       output: '.output',
     },
-    carousel: '.main-carousel',
+    carousel: '.carousel-main',
   },
+  booking: {
+    peopleAmount: '.people-amount',
+    hoursAmount: '.hours-amount',
+    tables: '.floor-plan .table',
+    floorPlan: '.floor-plan',
+    form: '.booking-form',
+    submit: '.booking-form [type="submit"]',
+    phone: '.booking-form [name="phone"]',
+    address: '.booking-form [name="address"]',
+    starters: '.booking-form [name="starter"]',
+  },
+  nav: {
+    links: '.main-nav a',
+  },
+
+  // CODE ADDED START
   cart: {
     productList: '.cart__order-summary',
     toggleTrigger: '.cart__summary',
@@ -56,45 +70,28 @@ export const select = {
     phone: '[name="phone"]',
     address: '[name="address"]',
   },
-  home: {
-    orderButton: '.order-online',
-    bookButton: '.book-a-table',
-    openingHours: '.opening-hours',
-  },
   cartProduct: {
     amountWidget: '.widget-amount',
     price: '.cart__product-price',
     edit: '[href="#edit"]',
     remove: '[href="#remove"]',
   },
-  booking: {
-    peopleAmount: '.people-amount',
-    hoursAmount: '.hours-amount',
-    tables: '.floor-plan .table',
-    allTables: '.floor-plan',
-    phone: '.order-confirmation [name="phone"]',
-    address: '.order-confirmation [name="address"]',
-    bookingSubmit: '.order-confirmation [type="submit"]',
-    starters: '.starters',
-  },
-  nav: {
-    links: '.main-nav a',
-    options: '.main-options a',
-  },
+  // CODE ADDED END
 };
-  
+
 export const classNames = {
   menuProduct: {
     wrapperActive: 'active',
     imageVisible: 'active',
   },
+  // CODE ADDED START
   cart: {
     wrapperActive: 'active',
   },
   booking: {
     loading: 'loading',
-    tableBooked: 'booked',
     table: 'table',
+    tableBooked: 'booked',
     tableSelected: 'selected',
   },
   nav: {
@@ -102,45 +99,50 @@ export const classNames = {
   },
   pages: {
     active: 'active',
-  },
+  }
+  // CODE ADDED END
 };
-  
+
 export const settings = {
-  hours: {
-    open: 12,
-    close: 24,
-  },
   amountWidget: {
     defaultValue: 1,
     defaultMin: 1,
     defaultMax: 9,
+  }, // CODE CHANGED
+  // CODE ADDED START
+  cart: {
+    defaultDeliveryFee: 20,
+  },
+  hours: {
+    open: 12,
+    close: 24,
   },
   datePicker: {
     maxDaysInFuture: 14,
   },
-  cart: {
-    defaultDeliveryFee: 20,
-  },
   booking: {
     tableIdAttribute: 'data-table',
   },
+  // CODE ADDED END
   db: {
-    url: '//' + window.location.hostname + (window.location.hostname=='localhost' ? ':8080/api' : ''),
-    product: 'product',
-    order: 'order',
-    booking: 'booking',
-    event: 'event',
+    url: '//' + window.location.hostname + (window.location.hostname=='localhost' ? ':3131' : ''),
+    products: 'products',
+    orders: 'orders',
+    bookings: 'bookings',
+    events: 'events',
     dateStartParamKey: 'date_gte',
     dateEndParamKey: 'date_lte',
     notRepeatParam: 'repeat=false',
     repeatParam: 'repeat_ne=false',
   },
+ 
 };
-  
+
 export const templates = {
   menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
+  // CODE ADDED START
   cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
   bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
-  homeWidget: Handlebars.compile(document.querySelector(select.templateOf.homeWidget).innerHTML),
+  home: Handlebars.compile(document.querySelector(select.templateOf.home).innerHTML)
+  // CODE ADDED END
 };
-  
