@@ -1,5 +1,5 @@
 {
-   "product": [
+   "products": [
      {
        "id": "cake",
        "class": "small",
@@ -202,8 +202,8 @@
        }
      }
    ],
-   "order": [],
-   "event": [
+   "orders": [],
+   "events": [
      {
        "id": 1,
        "date": "2021-01-01",
